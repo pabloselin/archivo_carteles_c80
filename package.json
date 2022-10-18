@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open",
+    "start": "webpack serve --open --env mode=development",
     "build": "webpack --mode=production",
     "watch": "webpack --watch"
   },

@@ -13,6 +13,8 @@ import html from "./index.html";
 //React components
 import RenderCartelModal from "./components/CartelModal";
 
+//console.log(process.env);
+
 async function getCarteles() {
   const response = await fetch(
     "https://archivocarteles.c80.cl/data/combinedData_inst.json",
@@ -23,7 +25,7 @@ async function getCarteles() {
   );
 
   const data = await response.json();
-  console.log(data);
+  loadDom(data.slice(0, perpage));
 }
 
 getCarteles();
@@ -400,4 +402,4 @@ $objectsSelect.addEventListener("change", function (e) {
   $etiquetasSelect.selectedIndex = 0;
 });
 
-loadDom(data.slice(0, perpage));
+//loadDom(data.slice(0, perpage));
