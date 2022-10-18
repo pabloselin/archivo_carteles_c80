@@ -5,13 +5,6 @@ const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
 	entry: { frontend: ["./src/index.js", "./src/sass/main.scss"] },
-	plugins: [
-		new MiniCssExtractPlugin({ filename: "[name][hash].css" }),
-		new HtmlWebpackPlugin({
-			title: "Archivo Carteles",
-			template: "src/index.html",
-		}),
-	],
 	mode: "development",
 	output: {
 		filename: "[name][contenthash].js",
@@ -31,11 +24,7 @@ module.exports = {
 			},
 			{
 				test: /\.s?css$/i,
-				use: [
-					devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-					"css-loader",
-					"sass-loader",
-				],
+				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 			},
 			{
 				test: /\.m?js$/,
@@ -58,4 +47,11 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new MiniCssExtractPlugin({ filename: "[name][fullhash].css" }),
+		new HtmlWebpackPlugin({
+			title: "Archivo Carteles",
+			template: "src/index.html",
+		}),
+	],
 };

@@ -1,22 +1,58 @@
 //import "./style.css";
-import "./sass/main.scss";
-import * as bootstrap from "bootstrap";
-import data from "../json/combinedData_inst.json";
+//import "./sass/main.scss";
+//import * as bootstrap from "bootstrap";
+//import data from "../json/combinedData_inst.json";
 import LazyLoad from "vanilla-lazyload";
 
-import labelsTable from "../json/labelsTable";
-import labelsTableES from "../json/labelsTranslationTable";
-import objectsTable from "../json/objectsTable";
-import objectsTableES from "../json/objectsTranslationTable";
-import translatedStringFromArray from "./translatedStringFromArray";
+import labelsData from "../json/st_labelsData.json";
+import objectsData from "../json/st_objectsData.json";
+
 import logo from "./img/c80_logo_blanco.svg";
 import html from "./index.html";
 
 //React components
 import RenderCartelModal from "./components/CartelModal";
 
+async function getCarteles() {
+  const response = await fetch(
+    "https://archivocarteles.c80.cl/data/combinedData_inst.json",
+    {
+      method: "GET",
+      headers: { Accept: "application/json" },
+    }
+  );
+
+  const data = await response.json();
+  console.log(data);
+}
+
+getCarteles();
+
+// async function getCartelesData(url = "", data = {}) {
+//   const response = await fetch(url, {
+//     mode: "no-cors",
+//     headers: { "Content-Type": "application/json" },
+//   });
+// }
+
+// getCartelesData(
+//   "https://archivocarteles.c80.cl/data/combinedData_inst.json",
+//   {}
+// ).then((data) => {
+//   console.log(data);
+// });
+
 //console.log(data);
-let cartelesLazyLoad = new LazyLoad();
+
+//console.log(data);
+let cartelesLazyLoad = new LazyLoad({
+  callback_loaded: (el) => {
+    el.parentNode.classList.add("loaded");
+  },
+  callback_error: (el) => {
+    el.classList.add("hidden");
+  },
+});
 
 let dataLabels = new Set();
 let dataObjects = new Set();
@@ -31,6 +67,8 @@ let modalOpen = false;
 
 const c80Logo = new Image();
 c80Logo.src = logo;
+
+//console.log(labelsData, objectsData);
 
 const $grid = document.querySelector(".grid");
 const $header = document.getElementById("site-header");
@@ -87,41 +125,28 @@ const loadImgEl = (url, wrapper, i) => {
 
 const initData = () => {
   //Iterate first all for the lists
-  data.forEach((d, i) => {
-    d.labels.forEach((a) => {
-      dataLabels.add(a);
-    });
-    d.objects.forEach((a) => {
-      dataObjects.add(a);
-    });
-    d.words.split(/[\n\r\s]/).forEach((a) => {
-      dataWords.push(a);
-    });
-  });
+  // data.forEach((d, i) => {
+  //   d.labels.forEach((a) => {
+  //     dataLabels.add(a);
+  //   });
+  //   d.objects.forEach((a) => {
+  //     dataObjects.add(a);
+  //   });
+  //   d.words.split(/[\n\r\s]/).forEach((a) => {
+  //     dataWords.push(a);
+  //   });
+  // });
   //console.log(dataLabels, dataObjects, dataWords);
   initFilters();
-  document.body.classList.remove("loading");
 };
 
 const initFilters = () => {
-  Array.from(labelsTable).map((label, idx) => {
-    let translated = translatedStringFromArray(
-      label,
-      labelsTable,
-      labelsTableES
-    );
-    //$etiquetasPlace.innerHTML += `<span class="filter-label" data-label="${label}">${translated}</span>`;
-    $etiquetasPlace.innerHTML += `<option value="${label}">${translated}</option>`;
+  Array.from(labelsData).map((label, idx) => {
+    $etiquetasPlace.innerHTML += `<option value="${label.itemValue}">${label.itemTitle} (${label.itemOcurrences})</option>`;
   });
 
-  Array.from(objectsTable).map((object, idx) => {
-    let translated = translatedStringFromArray(
-      object,
-      objectsTable,
-      objectsTableES
-    );
-    //$objectsPlace.innerHTML += `<span class="filter-object" data-object="${object}">${translated}</span>`;
-    $objectsPlace.innerHTML += `<option value="${object}">${translated}</option>`;
+  Array.from(objectsData).map((object, idx) => {
+    $objectsPlace.innerHTML += `<option value="${object.itemValue}">${object.itemTitle} (${object.itemOcurrences})</option>`;
   });
 };
 
@@ -137,7 +162,7 @@ const filterSign = (filterItem, filter, translatedItem) => {
   $grid.innerHTML = "";
   let filterLabel = filter == "labels" ? "Etiquetas" : "Objetos";
   $searchInput.value = "";
-  resultsTitle(`${filteredData.length} ${filterLabel} : ${translatedItem}`);
+  resultsTitle(`${filterLabel} : ${translatedItem}`);
   loadDom(filteredData);
 };
 
@@ -162,18 +187,7 @@ const resultsTitle = (title) => {
 };
 
 const loadDom = (data) => {
-  let labels = new Set();
-  let objects = new Set();
-  let words = new Set();
   let imagePromises = [];
-
-  // change range to load
-  // let rangeStart = 0;
-  // let rangeEnd = 100;
-
-  //current data range
-  //let dataRange = data;
-  //data.responses = data.responses.slice(0,1500);
 
   // ~~~~~~~~~~~~ GET DATA in Range ~~~~~~~~~~~~
   data.forEach((d, i) => {
@@ -184,15 +198,15 @@ const loadDom = (data) => {
     wrapper.classList.add("item");
 
     d.labels.forEach((a) => {
-      labels.add(a);
+      //labels.add(a);
       localLabels.push(a);
     });
     d.objects.forEach((a) => {
-      objects.add(a);
+      //objects.add(a);
       localObjects.push(a);
     });
     d.words.split(/[\n\r\s]/).forEach((a) => {
-      words.add(a);
+      //words.add(a);
       localWords.push(a);
     });
 
@@ -288,17 +302,30 @@ $searchForm.addEventListener("submit", function (e) {
 document.addEventListener("click", function (e) {
   //console.log(e.target.parentNode);
   let parent = e.target.parentNode;
+  let objectsarr_es = new Set();
+  let labelsarr_es = new Set();
 
   if (e.target && parent.classList.contains("item")) {
     //console.log("clickity");
     let currentLabels = parent.getAttribute("data-labels").split(", ");
-    let currentLabels_es = currentLabels.map((label) => {
-      return translatedStringFromArray(label, labelsTable, labelsTableES);
+    let currentLabels_es = currentLabels.map((curlabel) => {
+      //return translatedStringFromArray(label, labelsTable, labelsTableES);
+      labelsData.map((label) => {
+        if (label.itemValue === curlabel) {
+          console.log(curlabel, label.itemValue, label.itemTitle);
+          labelsarr_es.add(label.itemTitle);
+        }
+      });
     });
 
     let currentObjects = parent.getAttribute("data-objects").split(", ");
-    let currentObjects_es = currentObjects.map((object) => {
-      return translatedStringFromArray(object, objectsTable, objectsTableES);
+    let currentObjects_es = currentObjects.map((curobject) => {
+      //return translatedStringFromArray(object, objectsTable, objectsTableES);
+      objectsData.map((object) => {
+        if (object.itemValue === curobject) {
+          objectsarr_es.add(object.itemTitle);
+        }
+      });
     });
 
     //console.log(currentLabels_es, currentObjects_es);
@@ -307,8 +334,8 @@ document.addEventListener("click", function (e) {
       modal: true,
       type: "info",
       image: e.target.getAttribute("src"),
-      labels: currentLabels_es,
-      objects: currentObjects_es,
+      labels: Array.from(labelsarr_es),
+      objects: Array.from(objectsarr_es),
       words: parent.getAttribute("data-words").split(", "),
       comments: parent.getAttribute("data-comments"),
       date: parent.getAttribute("data-date"),
