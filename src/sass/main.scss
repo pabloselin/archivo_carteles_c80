@@ -1,7 +1,7 @@
 //frontend sass
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300;1,400;1,700&display=swap');
 
 $c80_gris: #414e62;
 $c80_gris_claro: #ECEDEF;
@@ -76,6 +76,10 @@ h1.titulo-principal {
 	color: $c80_rojo;
 	letter-spacing: .2rem;
 	font-size: 32px;
+}
+
+h2.bajada {
+	font-weight: 400;
 }
 
 .introduccion {
