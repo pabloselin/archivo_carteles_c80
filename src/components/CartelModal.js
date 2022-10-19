@@ -32,15 +32,14 @@ const ModalData = (props) => {
 						))}
 					</div>
 					<div className="datasection">
+						<strong>Objetos Detectados</strong>
+						{props.data.objects.join(", ")}
+					</div>
+					<div className="datasection">
 						<strong>Etiquetas</strong>{" "}
 						{props.data.labels.join(", ")}
 					</div>
-					<div className="datasection">
-						<strong>Objetos</strong>
-						{props.data.objects.join(", ")}
-					</div>
-
-					{props.data.comments && (
+					{/* {props.data.comments && (
 						<div className="datasection">
 							<strong>Comentarios</strong>
 							{props.data.comments
@@ -49,7 +48,11 @@ const ModalData = (props) => {
 									<p key={idx}>{comment}</p>
 								))}
 						</div>
-					)}
+					)} */}
+					<div className="datasection">
+						<strong>Autoría</strong>
+						<p class="disclaimer">Si quieres contarnos a quien pertenece esta imagen o bajarla haz <a href="https://forms.gle/KmhbY6bMwEymv9aZ6">click aquí</a>.</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -88,23 +91,27 @@ const CartelModal = (props) => {
 										{props.data.type == "info" ? (
 											<ModalData data={props.data} />
 										) : (
-											<div className="row about-modal">
+											<div className="row about-modal" class="sobre-el">
 												<div className="col-12">
-													<h1>Sobre el proyecto</h1>
+													<h5>Estas imágenes fueron descargadas con fines únicamente educacionales y de investigación. No pertenecen a quienes desarrollaron esta plataforma.
+														Si alguna imagen te pertenece y quisieras solicitar que se elimine de este archivo, 
+														puedes rellenar este <a href="https://forms.gle/KmhbY6bMwEymv9aZ6">formulario</a>.
+													</h5>
+													<h2>Sobre el proyecto</h2>
 													<p>
 														La herramienta
 														diferenciadora de este
 														proyecto es el algoritmo
-														de visión por computador
-														(Google Cloud Vision
-														API) que usa modelos de
+														de visión por computador 
+														<a href="https://cloud.google.com/vision"> (Google Cloud Vision
+														API)</a> que usa modelos de
 														inteligencia artificial
 														previamente entrenados
 														con millones de imágenes
 														para interpretar texto,
 														detectar objetos,
-														colores y aplicar
-														etiquetas. La velocidad
+														colores, aplicar
+														etiquetas, entre otros. La velocidad
 														de procesamiento la hace
 														especialmente útil para
 														poder organizar grandes
@@ -117,7 +124,7 @@ const CartelModal = (props) => {
 														más relevante para este
 														proyecto es el
 														reconocimiento óptico de
-														caracteres o OCR por sus
+														caracteres o "OCR" por sus
 														siglas en inglés. Esta
 														tecnología se empezó a
 														desarrollar en el año
@@ -128,11 +135,8 @@ const CartelModal = (props) => {
 														visión. Hoy se utiliza
 														en múltiples
 														aplicaciones, como la
-														lectura de patentes de
-														autos en
-														estacionamientos y
-														autopistas hasta en las
-														cámaras de celulares.
+														lectura de patentes en
+														las autopistas o lectura de documentos como cheques o pasaportes.
 													</p>
 													<p>
 														En muchas de las
@@ -155,26 +159,19 @@ const CartelModal = (props) => {
 														en una imagen.
 													</p>
 													<p>
-														Es así que este archivo
+													Por último, el archivo fue analizado para extraer entidades
+													de las imágenes y asignar etiquetas. Éstas pueden identificar locaciones, 
+													actividades, animales, productos, entre otros. Es así que este archivo
 														C80 sobre imágenes en
 														Instagram de la revuelta
-														social 2019-2020 fue
-														analizado para detectar
-														y extraer entidades de
-														las imágenes para
-														asignar etiquetas. Éstas
-														pueden identificar
-														objetos generales,
-														locaciones, actividades,
-														animales, productos,
-														entre otros.
+														social 2019-2020 permite ser observado y categorizado con la ayuda de la inteligencia artificial.
 													</p>
 													<h2>Créditos</h2>
 													<p>
 														Este archivo fue
 														realizado como proyecto
 														de tesis de magíster de
-														Karina Hyland en el
+														 <a href="https://karinahy.com/"> Karina Hyland</a> en el
 														programa Interactive
 														Telecommunications de
 														NYU (New York
@@ -182,10 +179,10 @@ const CartelModal = (props) => {
 														2020.{" "}
 													</p>
 													<p>
-														Desarrollado en C80.cl
-														gracias a FONDART línea
-														diseño adjudicado en
-														2021, folio: 630870.
+														Desarrollado en <a href="https://c80.cl/"> C80.cl </a> 
+														gracias al Fondart Nacional línea
+														diseño, adjudicado en
+														2021 [folio: 630870].
 													</p>
 													<p>
 														El equipo 2022 de C80

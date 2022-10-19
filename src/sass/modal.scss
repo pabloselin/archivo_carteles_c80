@@ -88,11 +88,16 @@
 }
 
 .modal-overlay {
-		position: fixed;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.65);
 	z-index: 10;
+}
+
+.disclaimer {
+	font-style: italic;
+	font-weight: 300;
 }

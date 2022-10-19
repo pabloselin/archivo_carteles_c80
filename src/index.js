@@ -162,9 +162,13 @@ const filterSign = (filterItem, filter, translatedItem) => {
     }
   });
   $grid.innerHTML = "";
-  let filterLabel = filter == "labels" ? "Etiquetas" : "Objetos";
+  let filterLabel = filter == "labels" ? "la etiqueta" : "el objeto";
   $searchInput.value = "";
-  resultsTitle(`${filterLabel} : ${translatedItem}`);
+
+  resultsTitle(
+    `${filteredData.length} imágenes encontradas con ${filterLabel} "${translatedItem}"`
+  );
+
   loadDom(filteredData);
 };
 
@@ -185,7 +189,7 @@ const filterWord = (word) => {
 };
 
 const resultsTitle = (title) => {
-  $titlePlace.innerHTML = `<h2>${title}</h2>`;
+  $titlePlace.innerHTML = `<h6>${title}</h6>`;
 };
 
 const loadDom = (data) => {
