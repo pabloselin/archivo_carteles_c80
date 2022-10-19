@@ -1,6 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
+
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = (env) => {
@@ -61,6 +64,20 @@ module.exports = (env) => {
 			new HtmlWebpackPlugin({
 				title: "Archivo Carteles",
 				template: "src/index.html",
+			}),
+			new CopyPlugin({
+				patterns: [
+					{
+						from: path.resolve(
+							__dirname,
+							"json/combinedData_inst.json"
+						),
+						to: "/dist",
+					},
+				],
+			}),
+			new WriteFilePlugin({
+				test: /\.json$/,
 			}),
 		],
 	};

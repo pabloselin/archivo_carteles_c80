@@ -51,7 +51,14 @@ const ModalData = (props) => {
 					)} */}
 					<div className="datasection">
 						<strong>Autoría</strong>
-						<p class="disclaimer">Si quieres contarnos a quien pertenece esta imagen o bajarla haz <a href="https://forms.gle/KmhbY6bMwEymv9aZ6">click aquí</a>.</p>
+						<p className="disclaimer">
+							Si quieres contarnos a quien pertenece esta imagen o
+							bajarla haz{" "}
+							<a href="https://forms.gle/KmhbY6bMwEymv9aZ6">
+								click aquí
+							</a>
+							.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -91,28 +98,47 @@ const CartelModal = (props) => {
 										{props.data.type == "info" ? (
 											<ModalData data={props.data} />
 										) : (
-											<div className="row about-modal" class="sobre-el">
+											<div className="row about-modal sobre-el">
 												<div className="col-12">
-													<h5>Estas imágenes fueron descargadas con fines únicamente educacionales y de investigación. No pertenecen a quienes desarrollaron esta plataforma.
-														Si alguna imagen te pertenece y quisieras solicitar que se elimine de este archivo, 
-														puedes rellenar este <a href="https://forms.gle/KmhbY6bMwEymv9aZ6">formulario</a>.
+													<h5>
+														Estas imágenes fueron
+														descargadas con fines
+														únicamente educacionales
+														y de investigación. No
+														pertenecen a quienes
+														desarrollaron esta
+														plataforma. Si alguna
+														imagen te pertenece y
+														quisieras solicitar que
+														se elimine de este
+														archivo, puedes rellenar
+														este{" "}
+														<a href="https://forms.gle/KmhbY6bMwEymv9aZ6">
+															formulario
+														</a>
+														.
 													</h5>
 													<h2>Sobre el proyecto</h2>
 													<p>
 														La herramienta
 														diferenciadora de este
 														proyecto es el algoritmo
-														de visión por computador 
-														<a href="https://cloud.google.com/vision"> (Google Cloud Vision
-														API)</a> que usa modelos de
+														de visión por computador
+														<a href="https://cloud.google.com/vision">
+															{" "}
+															(Google Cloud Vision
+															API)
+														</a>{" "}
+														que usa modelos de
 														inteligencia artificial
 														previamente entrenados
 														con millones de imágenes
 														para interpretar texto,
 														detectar objetos,
 														colores, aplicar
-														etiquetas, entre otros. La velocidad
-														de procesamiento la hace
+														etiquetas, entre otros.
+														La velocidad de
+														procesamiento la hace
 														especialmente útil para
 														poder organizar grandes
 														repositorios.
@@ -124,19 +150,21 @@ const CartelModal = (props) => {
 														más relevante para este
 														proyecto es el
 														reconocimiento óptico de
-														caracteres o "OCR" por sus
-														siglas en inglés. Esta
-														tecnología se empezó a
-														desarrollar en el año
-														1914, pero tomó fuerza a
-														principios de los 70
-														como una solución para
-														personas con baja o nula
-														visión. Hoy se utiliza
-														en múltiples
+														caracteres o "OCR" por
+														sus siglas en inglés.
+														Esta tecnología se
+														empezó a desarrollar en
+														el año 1914, pero tomó
+														fuerza a principios de
+														los 70 como una solución
+														para personas con baja o
+														nula visión. Hoy se
+														utiliza en múltiples
 														aplicaciones, como la
 														lectura de patentes en
-														las autopistas o lectura de documentos como cheques o pasaportes.
+														las autopistas o lectura
+														de documentos como
+														cheques o pasaportes.
 													</p>
 													<p>
 														En muchas de las
@@ -159,30 +187,49 @@ const CartelModal = (props) => {
 														en una imagen.
 													</p>
 													<p>
-													Por último, el archivo fue analizado para extraer entidades
-													de las imágenes y asignar etiquetas. Éstas pueden identificar locaciones, 
-													actividades, animales, productos, entre otros. Es así que este archivo
+														Por último, el archivo
+														fue analizado para
+														extraer entidades de las
+														imágenes y asignar
+														etiquetas. Éstas pueden
+														identificar locaciones,
+														actividades, animales,
+														productos, entre otros.
+														Es así que este archivo
 														C80 sobre imágenes en
 														Instagram de la revuelta
-														social 2019-2020 permite ser observado y categorizado con la ayuda de la inteligencia artificial.
+														social 2019-2020 permite
+														ser observado y
+														categorizado con la
+														ayuda de la inteligencia
+														artificial.
 													</p>
 													<h2>Créditos</h2>
 													<p>
 														Este archivo fue
 														realizado como proyecto
 														de tesis de magíster de
-														 <a href="https://karinahy.com/"> Karina Hyland</a> en el
-														programa Interactive
+														<a href="https://karinahy.com/">
+															{" "}
+															Karina Hyland
+														</a>{" "}
+														en el programa
+														Interactive
 														Telecommunications de
 														NYU (New York
 														University) en mayo de
 														2020.{" "}
 													</p>
 													<p>
-														Desarrollado en <a href="https://c80.cl/"> C80.cl </a> 
-														gracias al Fondart Nacional línea
-														diseño, adjudicado en
-														2021 [folio: 630870].
+														Desarrollado en{" "}
+														<a href="https://c80.cl/">
+															{" "}
+															C80.cl{" "}
+														</a>
+														gracias al Fondart
+														Nacional línea diseño,
+														adjudicado en 2021
+														[folio: 630870].
 													</p>
 													<p>
 														El equipo 2022 de C80

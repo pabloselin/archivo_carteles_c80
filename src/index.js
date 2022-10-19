@@ -1,7 +1,7 @@
 //import "./style.css";
 //import "./sass/main.scss";
 //import * as bootstrap from "bootstrap";
-//import data from "../json/combinedData_inst.json";
+import data from "../json/combinedData_inst.json";
 import LazyLoad from "vanilla-lazyload";
 
 import labelsData from "../json/st_labelsData.json";
@@ -13,22 +13,23 @@ import html from "./index.html";
 //React components
 import RenderCartelModal from "./components/CartelModal";
 
-//console.log(process.env);
+// console.log(window.location);
+// let dataUrl =
+//   window.location.hostname == "localhost"
+//     ? "https://archivocarteles.c80.cl/data/combinedData_inst.json"
+//     : "https://archivocarteles.c80.cl/data/combinedData_inst.json";
+// async function getCarteles() {
+//   const response = await fetch(dataUrl, {
+//     method: "GET",
+//     mode: "no-cors",
+//     headers: { Accept: "application/json" },
+//   });
 
-async function getCarteles() {
-  const response = await fetch(
-    "https://archivocarteles.c80.cl/data/combinedData_inst.json",
-    {
-      method: "GET",
-      headers: { Accept: "application/json" },
-    }
-  );
+//   const data = await response.json();
+//   loadDom(data.slice(0, perpage));
+// }
 
-  const data = await response.json();
-  loadDom(data.slice(0, perpage));
-}
-
-getCarteles();
+// getCarteles();
 
 // async function getCartelesData(url = "", data = {}) {
 //   const response = await fetch(url, {
@@ -144,11 +145,11 @@ const initData = () => {
 
 const initFilters = () => {
   Array.from(labelsData).map((label, idx) => {
-    $etiquetasPlace.innerHTML += `<option value="${label.itemValue}">${label.itemTitle} (${label.itemOcurrences})</option>`;
+    $etiquetasPlace.innerHTML += `<option data-title="${label.itemTitle}" value="${label.itemValue}">${label.itemTitle} (${label.itemOcurrences})</option>`;
   });
 
   Array.from(objectsData).map((object, idx) => {
-    $objectsPlace.innerHTML += `<option value="${object.itemValue}">${object.itemTitle} (${object.itemOcurrences})</option>`;
+    $objectsPlace.innerHTML += `<option data-title="${object.itemTitle}" value="${object.itemValue}">${object.itemTitle} (${object.itemOcurrences})</option>`;
   });
 };
 
@@ -394,16 +395,20 @@ document.addEventListener("click", function (e) {
 
 $etiquetasSelect.addEventListener("change", function (e) {
   let translatedItem =
-    $etiquetasSelect.options[$etiquetasSelect.selectedIndex].text;
+    $etiquetasSelect.options[$etiquetasSelect.selectedIndex].getAttribute(
+      "data-title"
+    );
   filterSign(e.target.value, "labels", translatedItem);
   $objectsSelect.selectedIndex = 0;
 });
 
 $objectsSelect.addEventListener("change", function (e) {
   let translatedItem =
-    $objectsSelect.options[$objectsSelect.selectedIndex].text;
+    $objectsSelect.options[$objectsSelect.selectedIndex].getAttribute(
+      "data-title"
+    );
   filterSign(e.target.value, "objects", translatedItem);
   $etiquetasSelect.selectedIndex = 0;
 });
 
-//loadDom(data.slice(0, perpage));
+loadDom(data.slice(0, perpage));
