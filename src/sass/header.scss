@@ -120,6 +120,7 @@ header#header-sitio #main-nav .menu-secciones ul {
 	top: 50px;
 	width: 100%;
 	background-color: $c80_gris;
+	z-index:100;
 	#menu-movil {
 		border-top: 1px solid white;
 		@include media-breakpoint-up(sm) {
@@ -157,8 +158,12 @@ header#header-sitio #main-nav .menu-secciones ul {
 
 .nav-proyecto {
 	position: absolute;
-	right: 12px;
-	top: 24px;
+	right: 0;
+	top: 0;
+	@include media-breakpoint-up(sm) {
+		top: 24px;	
+		right: 12px;
+	}
 	ul {
 		display: flex;
 		li {

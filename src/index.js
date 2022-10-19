@@ -1,7 +1,7 @@
 //import "./style.css";
 //import "./sass/main.scss";
-//import * as bootstrap from "bootstrap";
-import data from "../json/combinedData_inst.json";
+import * as bootstrap from "bootstrap";
+import data from "../json/combinedData_inst_ID.json";
 import LazyLoad from "vanilla-lazyload";
 
 import labelsData from "../json/st_labelsData.json";
@@ -219,6 +219,7 @@ const loadDom = (data) => {
 
     let postDate = new Date(d.date * 1000);
 
+    wrapper.setAttribute("data-id", d.id);
     wrapper.setAttribute("data-labels", Array.from(localLabels).join(", "));
     wrapper.setAttribute("data-objects", Array.from(localObjects).join(", "));
     wrapper.setAttribute("data-words", Array.from(localWords).join(", "));
@@ -347,6 +348,7 @@ document.addEventListener("click", function (e) {
       comments: parent.getAttribute("data-comments"),
       date: parent.getAttribute("data-date"),
       shortcode: parent.getAttribute("data-shortcode"),
+      id: parent.getAttribute("data-id"),
     };
 
     modalOpen = true;

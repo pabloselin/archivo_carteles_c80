@@ -6,15 +6,14 @@ const ModalData = (props) => {
 	return (
 		<div className="row">
 			<div className="data col">
-				<img src={props.data.image} />
+				<div className="modalimagewrap">
+					<img src={props.data.image} />
+				</div>
 				<div className="ficha">
 					<div className="datasection">
 						<strong>
-							ID {props.data.shortcode}
-							<a
-								target="_blank"
-								href={`https://instagram.com/p/${props.data.shortcode}`}
-							>
+							ID {props.data.id}
+							<a target="_blank" href={props.data.image}>
 								{" "}
 								<i className="fa fa-link"></i>
 							</a>
